@@ -20,4 +20,9 @@ RUN cd /root && wget https://github.com/monacocoin-net/monoeci-core/releases/dow
 	 tar xzvf monoeciCore-0.12.2-linux64-cli.Ubuntu16.04.tar.gz && \
 	 chmod +x monoecid monoeci-cli monoeci-tx
 
+COPY src/sentinel.conf /root/sentinel/sentinel.conf
+
+RUN echo '* * * * * cd /home/YOURUSERNAME/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1' >> /etc/cron.d/sentinel
+
+
 ENTRYPOINT ["/root/monoecid"]
